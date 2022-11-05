@@ -1,0 +1,62 @@
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.csproj.AssemblyReference.cache
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.GeneratedMSBuildEditorConfig.editorconfig
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.AssemblyInfoInputs.cache
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.AssemblyInfo.cs
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.csproj.CoreCompileInputs.cache
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.MvcApplicationPartsAssemblyInfo.cache
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\appsettings.Development.json
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\appsettings.json
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.exe
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.deps.json
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.runtimeconfig.json
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.pdb
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\MySqlConnector.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\staticwebassets.build.json
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\staticwebassets.development.json
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\scopedcss\bundle\TrabalhoPOO.styles.css
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.csproj.CopyComplete
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\refint\TrabalhoPOO.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.pdb
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.genruntimeconfig.cache
+F:\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\ref\TrabalhoPOO.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Humanizer.dll
+F:\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.csproj.AssemblyReference.cache
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.AssemblyInfoInputs.cache
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.AssemblyInfo.cs
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.csproj.CoreCompileInputs.cache
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\refint\TrabalhoPOO.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.pdb
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\appsettings.json
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.exe
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.deps.json
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.runtimeconfig.json
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\TrabalhoPOO.pdb
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\MySqlConnector.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\scopedcss\bundle\TrabalhoPOO.styles.css
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.csproj.CopyComplete
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.genruntimeconfig.cache
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\ref\TrabalhoPOO.dll
