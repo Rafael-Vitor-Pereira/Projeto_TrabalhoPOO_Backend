@@ -1,3 +1,4 @@
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using TrabalhoPOO.Dtos.Cliente;
 using TrabalhoPOO.Models;
@@ -5,24 +6,22 @@ using TrabalhoPOO.Repositores;
 
 namespace TrabalhoPOO.Services;
 
-public class ClienteServico
-{
-    private ClienteRepositorio _clienteRepositorio;
+public class ClienteServico{
+	private readonly ClienteRepositorio _clienteRepositorio;
 
 	public ClienteServico([FromServices] ClienteRepositorio repositorio){
 		_clienteRepositorio = repositorio;
 	}
 
 	public Resposta CriarCliente(CriarAtualizarRequisicao novoCliente){
-		var cliente = new Cliente();
-		RequisicaoParaModelo(novoCliente, cliente);
+		var cliente = novoCliente.Adapt<Cliente>();
 
 		var agora = DateTime.Now;
 		cliente.DataCadastro = agora;
 
 		_clienteRepositorio.CriarCliente(cliente);
 
-		var resposta = ModeloParaResposta(cliente);
+		var resposta = cliente.Adapt<Resposta>();
 
 		return resposta;
 	}
@@ -30,65 +29,40 @@ public class ClienteServico
 	public List<Resposta> ListarCliente(){
 		var clientes = _clienteRepositorio.ListarCliente();
 
-		List<Resposta> clienteResposta = new();
+		var respostas = clientes.Adapt<List<Resposta>>();
 
-		foreach (var pessoa in clientes)
-		{
-			var resposta = ModeloParaResposta(pessoa);
-
-			clienteResposta.Add(resposta);
-		}
-
-		return clienteResposta;
+		return respostas;
 	}
 
 	public void Remover(int id){
-		var cliente = _clienteRepositorio.Buscar(id);
-
-		if(cliente is null){
-			return;
-		}
+		var cliente  = BuscarPeloId(id);
 
 		_clienteRepositorio.Remover(cliente);
 	}
 
-	private Resposta ModeloParaResposta(Cliente modelo){
-		var resposta = new Resposta();
-		resposta.Id = modelo.Id;
-		resposta.Nome = modelo.Nome;
-		resposta.Email = modelo.Email;
-		resposta.Telefone = modelo.Telefone;
-		resposta.Usuario = modelo.Usuario;
-		resposta.DataCadastro = modelo.DataCadastro;
-
-		return resposta;
-	}
-
 	public Resposta Buscar(int id){
-		var cliente  = _clienteRepositorio.Buscar(id);
+		var cliente  = BuscarPeloId(id, false);
 
-		return ModeloParaResposta(cliente);
+		return cliente.Adapt<Resposta>();
 	}
 
 	public Resposta Atualizar(int id, CriarAtualizarRequisicao clienteEditado){
-		var cliente = _clienteRepositorio.Buscar(id);
+		var cliente  = BuscarPeloId(id);
 
-		if(cliente is null){
-			return null;
-		}
-
-		RequisicaoParaModelo(clienteEditado, cliente);
+		clienteEditado.Adapt(cliente);
 
 		_clienteRepositorio.Atualizar();
 
-		return ModeloParaResposta(cliente);
+		return cliente.Adapt<Resposta>();
 	}
 
-	private void RequisicaoParaModelo(CriarAtualizarRequisicao requisicao, Cliente modelo){
-		modelo.Nome = requisicao.Nome;
-		modelo.Email = requisicao.Email;
-		modelo.Telefone = requisicao.Telefone;
-		modelo.Usuario = requisicao.Usuario;
-		modelo.Senha = requisicao.Senha;
+	private Cliente BuscarPeloId(int id, bool tracking = true){
+		var cliente = _clienteRepositorio.Buscar(id, tracking);
+
+		if(cliente is null){
+			throw new Exception("Cliente não encontrado!");
+		}
+
+		return cliente;
 	}
 }

@@ -60,3 +60,5 @@ C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\
 C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.csproj.CopyComplete
 C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\TrabalhoPOO.genruntimeconfig.cache
 C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\obj\Debug\net6.0\ref\TrabalhoPOO.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Mapster.dll
+C:\Users\Rafael\Desktop\Rafael\Arquivos e projetos\Rafael\Trabalhos\TrabalhoPOO\bin\Debug\net6.0\Mapster.Core.dll

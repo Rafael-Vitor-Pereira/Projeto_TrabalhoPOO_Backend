@@ -8,34 +8,52 @@ namespace TrabalhoPOO.Controllers;
 [Route("pedido")]
 
 public class PedidoController : ControllerBase{
-    private PedidoServico _pedidoServico;
+	private readonly PedidoServico _pedidoServico;
 
 	public PedidoController([FromServices] PedidoServico servico){
 		_pedidoServico = servico;
 	}
 
 	[HttpPost]
-	public Resposta Cadastro([FromBody] CriarAtualizarRequisicao novoPedido){
-		return _pedidoServico.CriarPedido(novoPedido);
+	public ActionResult<Resposta> Cadastro([FromBody] CriarAtualizarRequisicao novoPedido){
+		var resposta = _pedidoServico.CriarPedido(novoPedido); 
+		return CreatedAtAction(nameof(Buscar), new {id = resposta.Id}, resposta);
 	}
 
 	[HttpGet]
-	public List<Resposta> Listar(){
-		return _pedidoServico.ListarPedido();
+	public ActionResult<List<Resposta>> Listar(){
+		return Ok(_pedidoServico.ListarPedido());
 	}
 
 	[HttpGet("{id:int}")]
-	public Resposta Buscar([FromRoute] int id){
-		return _pedidoServico.Buscar(id);
+	public ActionResult<Resposta> Buscar([FromRoute] int id){
+		try{
+			return Ok(_pedidoServico.Buscar(id));
+		}catch(Exception e){
+			return NotFound(new {mensagem = e.Message});
+		}
+		
 	}
 
 	[HttpDelete("{id:int}")]
-	public void Delete([FromRoute] int id){
-		_pedidoServico.Remover(id);
+	public ActionResult Delete([FromRoute] int id){
+		try{
+			_pedidoServico.Remover(id);
+
+			return NoContent();
+		}catch(Exception e){
+			return NotFound(new {mensagem = e.Message});
+		}
+		
 	}
 
 	[HttpPut("{id:int}")]
-	public Resposta Editar([FromRoute] int id, [FromBody] CriarAtualizarRequisicao pedidoEditado){
-		return _pedidoServico.Atualizar(id, pedidoEditado);
+	public ActionResult<Resposta> Editar([FromRoute] int id, [FromBody] CriarAtualizarRequisicao pedidoEditado){
+		try{
+			return Ok(_pedidoServico.Atualizar(id, pedidoEditado));
+		}catch(Exception e){
+			return NotFound(new {mensagem = e.Message});
+		}
+		
 	}
 }

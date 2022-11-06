@@ -1,3 +1,4 @@
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using TrabalhoPOO.Dtos.Pedido;
 using TrabalhoPOO.Models;
@@ -5,24 +6,22 @@ using TrabalhoPOO.Repositores;
 
 namespace TrabalhoPOO.Services;
 
-public class PedidoServico
-{
-    private PedidoRepositorio _pedidoRepositorio;
+public class PedidoServico{
+	private readonly PedidoRepositorio _pedidoRepositorio;
 
 	public PedidoServico([FromServices] PedidoRepositorio repositorio){
 		_pedidoRepositorio = repositorio;
 	}
 
 	public Resposta CriarPedido(CriarAtualizarRequisicao novoPedido){
-		var pedido = new Pedido();
-		RequisicaoParaModelo(novoPedido, pedido);
+		var pedido = novoPedido.Adapt<Pedido>();
 
-        var agora = DateTime.Now;
+		var agora = DateTime.Now;
 		pedido.Data = agora;
 
 		_pedidoRepositorio.CriarPedido(pedido);
 
-		var resposta = ModeloParaResposta(pedido);
+		var resposta = pedido.Adapt<Resposta>();
 
 		return resposta;
 	}
@@ -30,63 +29,40 @@ public class PedidoServico
 	public List<Resposta> ListarPedido(){
 		var pedidos = _pedidoRepositorio.ListarPedido();
 
-		List<Resposta> pedidoResposta = new();
+		var respostas = pedidos.Adapt<List<Resposta>>();
 
-		foreach (var pessoa in pedidos)
-		{
-			var resposta = ModeloParaResposta(pessoa);
-
-			pedidoResposta.Add(resposta);
-		}
-
-		return pedidoResposta;
+		return respostas;
 	}
 
 	public void Remover(int id){
-		var pedido = _pedidoRepositorio.Buscar(id);
-
-		if(pedido is null){
-			return;
-		}
+		var pedido  = BuscarPeloId(id);
 
 		_pedidoRepositorio.Remover(pedido);
 	}
 
-	private Resposta ModeloParaResposta(Pedido modelo){
-		var resposta = new Resposta();
-		resposta.Id = modelo.Id;
-        resposta.Valor = modelo.Valor;
-		resposta.AtendenteId = modelo.AtendenteId;
-		resposta.ClienteId = modelo.ClienteId;
-        resposta.Data = modelo.Data;
-
-		return resposta;
-	}
-
 	public Resposta Buscar(int id){
-		var pedido  = _pedidoRepositorio.Buscar(id);
+		var pedido  = BuscarPeloId(id, false);
 
-		return ModeloParaResposta(pedido);
+		return pedido.Adapt<Resposta>();
 	}
 
 	public Resposta Atualizar(int id, CriarAtualizarRequisicao pedidoEditado){
-		var pedido = _pedidoRepositorio.Buscar(id);
+		var pedido  = BuscarPeloId(id);
 
-		if(pedido is null){
-			return null;
-		}
-
-		RequisicaoParaModelo(pedidoEditado, pedido);
+		pedidoEditado.Adapt(pedido);
 
 		_pedidoRepositorio.Atualizar();
 
-		return ModeloParaResposta(pedido);
+		return pedido.Adapt<Resposta>();
 	}
 
-	private void RequisicaoParaModelo(CriarAtualizarRequisicao requisicao, Pedido modelo){
-		modelo.Valor = requisicao.Valor;
-        modelo.AtendenteId = requisicao.AtendenteId;
-        modelo.ClienteId = requisicao.ClienteId;
-        modelo.Data = requisicao.Data;
+	private Pedido BuscarPeloId(int id, bool tracking = true){
+		var pedido = _pedidoRepositorio.Buscar(id, tracking);
+
+		if(pedido is null){
+			throw new Exception("pedido não encontrado!");
+		}
+
+		return pedido;
 	}
 }

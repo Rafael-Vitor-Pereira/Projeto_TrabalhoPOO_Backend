@@ -1,11 +1,12 @@
 using TrabalhoPOO.Data;
 using TrabalhoPOO.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace TrabalhoPOO.Repositores;
 
 public class ProdutoRepositorio{
-    private ContextoBD _contexto;
+	private readonly ContextoBD _contexto;
 
 	public ProdutoRepositorio([FromServices] ContextoBD contexto){
 		_contexto = contexto;
@@ -19,11 +20,11 @@ public class ProdutoRepositorio{
 	}
 
 	public List<Produto> ListarProduto(){
-		return _contexto.Produtos.ToList();
+		return _contexto.Produtos.AsNoTracking().ToList();
 	}
 
-	public Produto Buscar(int id){
-		return _contexto.Produtos.FirstOrDefault(produto => produto.Id == id);
+	public Produto Buscar(int id, bool tracking = true){
+		return (tracking) ? _contexto.Produtos.FirstOrDefault(produto => produto.Id == id) : _contexto.Produtos.AsNoTracking().FirstOrDefault(produto => produto.Id == id);	
 	}
 
 	public void Remover(Produto produto){

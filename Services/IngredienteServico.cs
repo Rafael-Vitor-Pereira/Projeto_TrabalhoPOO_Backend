@@ -1,3 +1,4 @@
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using TrabalhoPOO.Dtos.Ingrediente;
 using TrabalhoPOO.Models;
@@ -5,21 +6,19 @@ using TrabalhoPOO.Repositores;
 
 namespace TrabalhoPOO.Services;
 
-public class IngredienteServico
-{
-    private IngredienteRepositorio _ingredienteRepositorio;
+public class IngredienteServico{
+	private readonly IngredienteRepositorio _ingredienteRepositorio;
 
 	public IngredienteServico([FromServices] IngredienteRepositorio repositorio){
 		_ingredienteRepositorio = repositorio;
 	}
 
 	public Resposta CriarIngrediente(CriarAtualizarRequisicao novoIngrediente){
-		var ingrediente = new Ingrediente();
-		RequisicaoParaModelo(novoIngrediente, ingrediente);
+		var ingrediente = novoIngrediente.Adapt<Ingrediente>();
 
 		_ingredienteRepositorio.CriarIngrediente(ingrediente);
 
-		var resposta = ModeloParaResposta(ingrediente);
+		var resposta = ingrediente.Adapt<Resposta>();
 
 		return resposta;
 	}
@@ -27,59 +26,40 @@ public class IngredienteServico
 	public List<Resposta> ListarIngrediente(){
 		var ingredientes = _ingredienteRepositorio.ListarIngrediente();
 
-		List<Resposta> ingredienteResposta = new();
+		var respostas = ingredientes.Adapt<List<Resposta>>();
 
-		foreach (var pessoa in ingredientes)
-		{
-			var resposta = ModeloParaResposta(pessoa);
-
-			ingredienteResposta.Add(resposta);
-		}
-
-		return ingredienteResposta;
+		return respostas;
 	}
 
 	public void Remover(int id){
-		var ingrediente = _ingredienteRepositorio.Buscar(id);
-
-		if(ingrediente is null){
-			return;
-		}
+		var ingrediente  = BuscarPeloId(id);
 
 		_ingredienteRepositorio.Remover(ingrediente);
 	}
 
-	private Resposta ModeloParaResposta(Ingrediente modelo){
-		var resposta = new Resposta();
-		resposta.Id = modelo.Id;
-		resposta.Nome = modelo.Nome;
-		resposta.Valor = modelo.Valor;
-
-		return resposta;
-	}
-
 	public Resposta Buscar(int id){
-		var ingrediente  = _ingredienteRepositorio.Buscar(id);
+		var ingrediente  = BuscarPeloId(id, false);
 
-		return ModeloParaResposta(ingrediente);
+		return ingrediente.Adapt<Resposta>();
 	}
 
 	public Resposta Atualizar(int id, CriarAtualizarRequisicao ingredienteEditado){
-		var ingrediente = _ingredienteRepositorio.Buscar(id);
+		var ingrediente  = BuscarPeloId(id);
 
-		if(ingrediente is null){
-			return null;
-		}
-
-		RequisicaoParaModelo(ingredienteEditado, ingrediente);
+		ingredienteEditado.Adapt(ingrediente);
 
 		_ingredienteRepositorio.Atualizar();
 
-		return ModeloParaResposta(ingrediente);
+		return ingrediente.Adapt<Resposta>();
 	}
 
-	private void RequisicaoParaModelo(CriarAtualizarRequisicao requisicao, Ingrediente modelo){
-		modelo.Nome = requisicao.Nome;
-		modelo.Valor = requisicao.Valor;
+	private Ingrediente BuscarPeloId(int id, bool tracking = true){
+		var ingrediente = _ingredienteRepositorio.Buscar(id, tracking);
+
+		if(ingrediente is null){
+			throw new Exception("Ingrediente não encontrado!");
+		}
+
+		return ingrediente;
 	}
 }

@@ -8,15 +8,16 @@ namespace TrabalhoPOO.Controllers;
 [Route("atendente")]
 
 public class AtendenteController : ControllerBase{
-	private AtendenteServico _atendenteServico;
+	private readonly AtendenteServico _atendenteServico;
 
 	public AtendenteController([FromServices] AtendenteServico servico){
 		_atendenteServico = servico;
 	}
 
 	[HttpPost]
-	public Resposta Cadastro([FromBody] CriarAtualizarRequisicao novoAtendente){
-		return _atendenteServico.CriarAtendente(novoAtendente);
+	public ActionResult<Resposta> Cadastro([FromBody] CriarAtualizarRequisicao novoAtendente){
+		var resposta = _atendenteServico.CriarAtendente(novoAtendente); 
+		return CreatedAtAction(nameof(Buscar), new {id = resposta.Id}, resposta);
 	}
 
 	[HttpGet]
@@ -35,11 +36,13 @@ public class AtendenteController : ControllerBase{
 	}
 
 	[HttpDelete("{id:int}")]
-	public void Delete([FromRoute] int id){
+	public ActionResult Delete([FromRoute] int id){
 		try{
 			_atendenteServico.Remover(id);
+
+			return NoContent();
 		}catch(Exception e){
-			return;
+			return NotFound(new {mensagem = e.Message});
 		}
 		
 	}

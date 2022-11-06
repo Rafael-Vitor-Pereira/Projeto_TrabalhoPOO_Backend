@@ -1,3 +1,4 @@
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using TrabalhoPOO.Dtos.Produto;
 using TrabalhoPOO.Models;
@@ -5,81 +6,60 @@ using TrabalhoPOO.Repositores;
 
 namespace TrabalhoPOO.Services;
 
-public class ProdutoServico
-{
-    private ProdutoRepositorio _proProdutoRepositorio;
+public class ProdutoServico{
+	private readonly ProdutoRepositorio _produtoRepositorio;
 
 	public ProdutoServico([FromServices] ProdutoRepositorio repositorio){
-		_proProdutoRepositorio = repositorio;
+		_produtoRepositorio = repositorio;
 	}
 
 	public Resposta CriarProduto(CriarAtualizarRequisicao novoProduto){
-		var proProduto = new Produto();
-		RequisicaoParaModelo(novoProduto, proProduto);
+		var produto = novoProduto.Adapt<Produto>();
 
-		_proProdutoRepositorio.CriarProduto(proProduto);
+		_produtoRepositorio.CriarProduto(produto);
 
-		var resposta = ModeloParaResposta(proProduto);
+		var resposta = produto.Adapt<Resposta>();
 
 		return resposta;
 	}
 
 	public List<Resposta> ListarProduto(){
-		var proProdutos = _proProdutoRepositorio.ListarProduto();
+		var produtos = _produtoRepositorio.ListarProduto();
 
-		List<Resposta> proProdutoResposta = new();
+		var respostas = produtos.Adapt<List<Resposta>>();
 
-		foreach (var pessoa in proProdutos)
-		{
-			var resposta = ModeloParaResposta(pessoa);
-
-			proProdutoResposta.Add(resposta);
-		}
-
-		return proProdutoResposta;
+		return respostas;
 	}
 
 	public void Remover(int id){
-		var proProduto = _proProdutoRepositorio.Buscar(id);
+		var produto  = BuscarPeloId(id);
 
-		if(proProduto is null){
-			return;
-		}
-
-		_proProdutoRepositorio.Remover(proProduto);
-	}
-
-	private Resposta ModeloParaResposta(Produto modelo){
-		var resposta = new Resposta();
-		resposta.Id = modelo.Id;
-        resposta.Nome = modelo.Nome;
-		resposta.Valor = modelo.Valor;
-
-		return resposta;
+		_produtoRepositorio.Remover(produto);
 	}
 
 	public Resposta Buscar(int id){
-		var proProduto  = _proProdutoRepositorio.Buscar(id);
+		var produto  = BuscarPeloId(id, false);
 
-		return ModeloParaResposta(proProduto);
+		return produto.Adapt<Resposta>();
 	}
 
-	public Resposta Atualizar(int id, CriarAtualizarRequisicao proProdutoEditado){
-		var proProduto = _proProdutoRepositorio.Buscar(id);
+	public Resposta Atualizar(int id, CriarAtualizarRequisicao produtoEditado){
+		var produto  = BuscarPeloId(id);
 
-		if(proProduto is null){
-			return null;
+		produtoEditado.Adapt(produto);
+
+		_produtoRepositorio.Atualizar();
+
+		return produto.Adapt<Resposta>();
+	}
+
+	private Produto BuscarPeloId(int id, bool tracking = true){
+		var produto = _produtoRepositorio.Buscar(id, tracking);
+
+		if(produto is null){
+			throw new Exception("produto não encontrado!");
 		}
 
-		RequisicaoParaModelo(proProdutoEditado, proProduto);
-
-		_proProdutoRepositorio.Atualizar();
-
-		return ModeloParaResposta(proProduto);
-	}
-
-	private void RequisicaoParaModelo(CriarAtualizarRequisicao requisicao, Produto modelo){
-		modelo.Nome = requisicao.Nome;
-        modelo.Valor = requisicao.Valor;
+		return produto;
 	}
 }

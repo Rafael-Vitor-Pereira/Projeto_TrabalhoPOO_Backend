@@ -8,34 +8,52 @@ namespace TrabalhoPOO.Controllers;
 [Route("ingrediente")]
 
 public class IngredienteController : ControllerBase{
-    private IngredienteServico _ingredienteServico;
+	private readonly IngredienteServico _ingredienteServico;
 
 	public IngredienteController([FromServices] IngredienteServico servico){
 		_ingredienteServico = servico;
 	}
 
 	[HttpPost]
-	public Resposta Cadastro([FromBody] CriarAtualizarRequisicao novoIngrediente){
-		return _ingredienteServico.CriarIngrediente(novoIngrediente);
+	public ActionResult<Resposta> Cadastro([FromBody] CriarAtualizarRequisicao novoIngrediente){
+		var resposta = _ingredienteServico.CriarIngrediente(novoIngrediente); 
+		return CreatedAtAction(nameof(Buscar), new {id = resposta.Id}, resposta);
 	}
 
 	[HttpGet]
-	public List<Resposta> Listar(){
-		return _ingredienteServico.ListarIngrediente();
+	public ActionResult<List<Resposta>> Listar(){
+		return Ok(_ingredienteServico.ListarIngrediente());
 	}
 
 	[HttpGet("{id:int}")]
-	public Resposta Buscar([FromRoute] int id){
-		return _ingredienteServico.Buscar(id);
+	public ActionResult<Resposta> Buscar([FromRoute] int id){
+		try{
+			return Ok(_ingredienteServico.Buscar(id));
+		}catch(Exception e){
+			return NotFound(new {mensagem = e.Message});
+		}
+		
 	}
 
 	[HttpDelete("{id:int}")]
-	public void Delete([FromRoute] int id){
-		_ingredienteServico.Remover(id);
+	public ActionResult Delete([FromRoute] int id){
+		try{
+			_ingredienteServico.Remover(id);
+
+			return NoContent();
+		}catch(Exception e){
+			return NotFound(new {mensagem = e.Message});
+		}
+		
 	}
 
 	[HttpPut("{id:int}")]
-	public Resposta Editar([FromRoute] int id, [FromBody] CriarAtualizarRequisicao ingredienteEditado){
-		return _ingredienteServico.Atualizar(id, ingredienteEditado);
+	public ActionResult<Resposta> Editar([FromRoute] int id, [FromBody] CriarAtualizarRequisicao ingredienteEditado){
+		try{
+			return Ok(_ingredienteServico.Atualizar(id, ingredienteEditado));
+		}catch(Exception e){
+			return NotFound(new {mensagem = e.Message});
+		}
+		
 	}
 }

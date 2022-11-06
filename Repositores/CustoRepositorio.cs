@@ -1,11 +1,12 @@
 using TrabalhoPOO.Data;
 using TrabalhoPOO.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace TrabalhoPOO.Repositores;
 
 public class CustoRepositorio{
-    private ContextoBD _contexto;
+	private readonly ContextoBD _contexto;
 
 	public CustoRepositorio([FromServices] ContextoBD contexto){
 		_contexto = contexto;
@@ -19,11 +20,11 @@ public class CustoRepositorio{
 	}
 
 	public List<Custo> ListarCusto(){
-		return _contexto.Custos.ToList();
+		return _contexto.Custos.AsNoTracking().ToList();
 	}
 
-	public Custo Buscar(int id){
-		return _contexto.Custos.FirstOrDefault(custo => custo.Id == id);
+	public Custo Buscar(int id, bool tracking = true){
+		return (tracking) ? _contexto.Custos.FirstOrDefault(custo => custo.Id == id) : _contexto.Custos.AsNoTracking().FirstOrDefault(custo => custo.Id == id);	
 	}
 
 	public void Remover(Custo custo){

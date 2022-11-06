@@ -1,3 +1,4 @@
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using TrabalhoPOO.Dtos.Atendente;
 using TrabalhoPOO.Models;
@@ -6,22 +7,21 @@ using TrabalhoPOO.Repositores;
 namespace TrabalhoPOO.Services;
 
 public class AtendenteServico{
-	private AtendenteRepositorio _atendenteRepositorio;
+	private readonly AtendenteRepositorio _atendenteRepositorio;
 
 	public AtendenteServico([FromServices] AtendenteRepositorio repositorio){
 		_atendenteRepositorio = repositorio;
 	}
 
 	public Resposta CriarAtendente(CriarAtualizarRequisicao novoAtendente){
-		var atendente = new Atendente();
-		RequisicaoParaModelo(novoAtendente, atendente);
+		var atendente = novoAtendente.Adapt<Atendente>();
 
 		var agora = DateTime.Now;
 		atendente.DataCadastro = agora;
 
 		_atendenteRepositorio.CriarAtendente(atendente);
 
-		var resposta = ModeloParaResposta(atendente);
+		var resposta = atendente.Adapt<Resposta>();
 
 		return resposta;
 	}
@@ -29,16 +29,9 @@ public class AtendenteServico{
 	public List<Resposta> ListarAtendente(){
 		var atendentes = _atendenteRepositorio.ListarAtendente();
 
-		List<Resposta> atendenteResposta = new();
+		var respostas = atendentes.Adapt<List<Resposta>>();
 
-		foreach (var pessoa in atendentes)
-		{
-			var resposta = ModeloParaResposta(pessoa);
-
-			atendenteResposta.Add(resposta);
-		}
-
-		return atendenteResposta;
+		return respostas;
 	}
 
 	public void Remover(int id){
@@ -47,44 +40,24 @@ public class AtendenteServico{
 		_atendenteRepositorio.Remover(atendente);
 	}
 
-	private Resposta ModeloParaResposta(Atendente modelo){
-		var resposta = new Resposta();
-		resposta.Id = modelo.Id;
-		resposta.Nome = modelo.Nome;
-		resposta.Email = modelo.Email;
-		resposta.Telefone = modelo.Telefone;
-		resposta.Usuario = modelo.Usuario;
-		resposta.DataCadastro = modelo.DataCadastro;
-
-		return resposta;
-	}
-
 	public Resposta Buscar(int id){
-		var atendente  = BuscarPeloId(id);
+		var atendente  = BuscarPeloId(id, false);
 
-		return ModeloParaResposta(atendente);
+		return atendente.Adapt<Resposta>();
 	}
 
 	public Resposta Atualizar(int id, CriarAtualizarRequisicao atendenteEditado){
 		var atendente  = BuscarPeloId(id);
 
-		RequisicaoParaModelo(atendenteEditado, atendente);
+		atendenteEditado.Adapt(atendente);
 
 		_atendenteRepositorio.Atualizar();
 
-		return ModeloParaResposta(atendente);
+		return atendente.Adapt<Resposta>();
 	}
 
-	private void RequisicaoParaModelo(CriarAtualizarRequisicao requisicao, Atendente modelo){
-		modelo.Nome = requisicao.Nome;
-		modelo.Email = requisicao.Email;
-		modelo.Telefone = requisicao.Telefone;
-		modelo.Usuario = requisicao.Usuario;
-		modelo.Senha = requisicao.Senha;
-	}
-
-	private Atendente BuscarPeloId(int id){
-		var atendente = _atendenteRepositorio.Buscar(id);
+	private Atendente BuscarPeloId(int id, bool tracking = true){
+		var atendente = _atendenteRepositorio.Buscar(id, tracking);
 
 		if(atendente is null){
 			throw new Exception("Atendente não encontrado!");
