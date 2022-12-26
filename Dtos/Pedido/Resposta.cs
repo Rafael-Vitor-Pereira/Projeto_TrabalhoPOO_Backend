@@ -1,14 +1,11 @@
-namespace TrabalhoPOO.Dtos.Pedido;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Back_end.Dtos.Pedido;
 
 public class Resposta
 {
-    public int Id { get; set; }
-
-    public decimal Valor { get; set; }
-
-    public int AtendenteId { get; set; }
-
-    public int ClienteId { get; set; }
-
-    public DateTime Data { get; set; }
+    
 }

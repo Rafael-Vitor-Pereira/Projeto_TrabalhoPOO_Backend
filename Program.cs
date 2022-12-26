@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using TrabalhoPOO.Data;
-using TrabalhoPOO.Services;
-using TrabalhoPOO.Repositores;
+using Back_end.Data;
+using Back_end.Services;
+using Back_end.Repositores;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +25,7 @@ builder.Services.AddScoped<ProdutoServico>();
 builder.Services.AddScoped<ProdutoRepositorio>();
 
 builder.Services.AddDbContext<ContextoBD>(
-    options => 
+    options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("ConexaoBanco"),
         ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ConexaoBanco"))
@@ -42,8 +42,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // app.UseSwagger();
-    // app.UseSwaggerUI();
+  // app.UseSwagger();
+  // app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

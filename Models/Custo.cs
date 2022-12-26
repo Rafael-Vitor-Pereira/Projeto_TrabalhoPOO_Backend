@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TrabalhoPOO.Models;
+namespace Back_end.Models;
 
 public class Custo
 {

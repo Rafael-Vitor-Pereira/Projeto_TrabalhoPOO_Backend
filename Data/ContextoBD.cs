@@ -1,7 +1,7 @@
-using TrabalhoPOO.Models;
+using Back_end.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace TrabalhoPOO.Data;
+namespace Back_end.Data;
 
 public class ContextoBD : DbContext
 {

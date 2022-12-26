@@ -1,8 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace TrabalhoPOO.Models;
+namespace Back_end.Models;
 
+[Index(nameof(Email), IsUnique = true)]
 public class Cliente
 {
   [Required]

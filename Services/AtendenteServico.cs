@@ -1,68 +1,91 @@
-using Mapster;
+using Back_end.Dtos.Atendente;
+using Back_end.Models;
+using Back_end.Repositores;
 using Microsoft.AspNetCore.Mvc;
-using TrabalhoPOO.Dtos.Atendente;
-using TrabalhoPOO.Models;
-using TrabalhoPOO.Repositores;
+using Mapster;
 
-namespace TrabalhoPOO.Services;
+namespace Back_end.Services;
 
-public class AtendenteServico{
-	private readonly AtendenteRepositorio _atendenteRepositorio;
+public class AtendenteServico
+{
+  private readonly AtendenteRepositorio _repositorio;
 
-	public AtendenteServico([FromServices] AtendenteRepositorio repositorio){
-		_atendenteRepositorio = repositorio;
-	}
+  public AtendenteServico([FromServices] AtendenteRepositorio repositorio)
+  {
+    _repositorio = repositorio;
+  }
+  public Resposta Cadastrar(CriarRequisicao novoAtendente)
+  {
+    //copiar os dados da requisição para o modelo
+    var atendente = novoAtendente.Adapt<Atendente>();
 
-	public Resposta CriarAtendente(CriarAtualizarRequisicao novoAtendente){
-		var atendente = novoAtendente.Adapt<Atendente>();
+    //Regras de negócio específica
+    var agora = DateTime.Now;
+    atendente.DataCadastro = agora;
 
-		var agora = DateTime.Now;
-		atendente.DataCadastro = agora;
+    //Enviar para o repositório salvar no BD
+    _repositorio.CriarAtendente(atendente);
 
-		_atendenteRepositorio.CriarAtendente(atendente);
+    //copiar os dados do modelo para a resposta
+    var resposta = atendente.Adapt<Resposta>();
 
-		var resposta = atendente.Adapt<Resposta>();
+    return resposta;
+  }
 
-		return resposta;
-	}
+  public List<Resposta> Listar()
+  {
+    //Buscar todos os atendentes no repositório
+    var atendentes = _repositorio.Listar();
 
-	public List<Resposta> ListarAtendente(){
-		var atendentes = _atendenteRepositorio.ListarAtendente();
+    //copiando a lista de modelo para a lista de resposta
+    var resposta = atendentes.Adapt<List<Resposta>>();
 
-		var respostas = atendentes.Adapt<List<Resposta>>();
+    //retornar a lista de resposta
+    return resposta;
+  }
 
-		return respostas;
-	}
+  public Resposta Buscar(int id)
+  {
+    //Buscar no repositorio pelo id
+    var atendente = BuscarPeloId(id, false);
 
-	public void Remover(int id){
-		var atendente  = BuscarPeloId(id);
+    //copiar do modelo para a resposta
+    return atendente.Adapt<Resposta>();
+  }
 
-		_atendenteRepositorio.Remover(atendente);
-	}
+  public Resposta Atualizar(int id, AtualizarRequisicao atendenteEditado)
+  {
+    //Buscar o atendente pelo id
+    var atendente = BuscarPeloId(id);
 
-	public Resposta Buscar(int id){
-		var atendente  = BuscarPeloId(id, false);
+    //Copiar os dados da requisição para o modelo
+    atendenteEditado.Adapt(atendente);
 
-		return atendente.Adapt<Resposta>();
-	}
+    //Mandar repositório atualizar
+    _repositorio.Atualizar();
 
-	public Resposta Atualizar(int id, CriarAtualizarRequisicao atendenteEditado){
-		var atendente  = BuscarPeloId(id);
+    //Copiar do modelo para a resposta
+    return atendente.Adapt<Resposta>();
+  }
 
-		atendenteEditado.Adapt(atendente);
+  public void Excluir(int id)
+  {
+    //Buscar o atendente pelo id
+    var atendente = BuscarPeloId(id);
 
-		_atendenteRepositorio.Atualizar();
+    //Mandar o repositorio remover o atendente
+    _repositorio.Excluir(id);
+  }
 
-		return atendente.Adapt<Resposta>();
-	}
+  private Atendente BuscarPeloId(int id, bool tracking = true)
+  {
+    var atendente = _repositorio.Buscar(id, tracking);
 
-	private Atendente BuscarPeloId(int id, bool tracking = true){
-		var atendente = _atendenteRepositorio.Buscar(id, tracking);
+    if (atendente is null)
+    {
+      throw new Exception("Atendente não encontrado");
+    }
 
-		if(atendente is null){
-			throw new Exception("Atendente não encontrado!");
-		}
-
-		return atendente;
-	}
+    return atendente;
+  }
 }

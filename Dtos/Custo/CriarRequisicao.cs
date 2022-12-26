@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Back_end.Services;
+namespace Back_end.Dtos.Custo;
 
-public class CustoServico
+public class CriarRequisicao
 {
     
 }

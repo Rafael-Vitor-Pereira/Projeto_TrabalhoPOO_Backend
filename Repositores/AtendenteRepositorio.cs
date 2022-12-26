@@ -1,38 +1,49 @@
-using TrabalhoPOO.Data;
-using TrabalhoPOO.Models;
+using Back_end.Data;
+using Back_end.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace TrabalhoPOO.Repositores;
+namespace Back_end.Repositores;
 
-public class AtendenteRepositorio{
-	private readonly ContextoBD _contexto;
+public class AtendenteRepositorio
+{
+  private readonly ContextoBD _contexto;
 
-	public AtendenteRepositorio([FromServices] ContextoBD contexto){
-		_contexto = contexto;
-	}
+  public AtendenteRepositorio([FromServices] ContextoBD contexto)
+  {
+    _contexto = contexto;
+  }
 
-	public Atendente CriarAtendente(Atendente atendente){
-		_contexto.Atendentes.Add(atendente);
-		_contexto.SaveChanges();
+  public Atendente Cadastrar(Atendente atendente)
+  {
+    //Manda salvar no banco de dados
+    _contexto.Atendentes.Add(atendente);
+    _contexto.SaveChanges();
 
-		return atendente;
-	}
+    return atendente;
+  }
 
-	public List<Atendente> ListarAtendente(){
-		return _contexto.Atendentes.AsNoTracking().ToList();
-	}
+  public List<Atendente> Listar()
+  {
+    //retorna uma lista com todos os atendentes cadastrados
+    return _contexto.Atendentes.AsNoTracking().ToList();
+  }
 
-	public Atendente Buscar(int id, bool tracking = true){
-		return (tracking) ? _contexto.Atendentes.FirstOrDefault(atendente => atendente.Id == id) : _contexto.Atendentes.AsNoTracking().FirstOrDefault(atendente => atendente.Id == id);	
-	}
+  public Atendente Buscar(int id, bool tracking = true)
+  {
+    //Busca o atendente que tem o id recebido por parâmetro
+    return (tracking) ? _contexto.Atendentes.FirstOrDefault(atendente => atendente.Id == id) : _contexto.Atendentes.AsNoTracking().FirstOrDefault(atendente => atendente.Id == id);
+  }
 
-	public void Remover(Atendente atendente){
-		_contexto.Remove(atendente);
-		_contexto.SaveChanges();
-	}
+  public void Atualizar()
+  {
+    _contexto.SaveChanges();
+  }
 
-	public void Atualizar(){
-		_contexto.SaveChanges();
-	}
+  public void Excluir(Atendente atendente)
+  {
+    //mandar o contexto remover
+    _contexto.Remove(atendente);
+    _contexto.SaveChanges();
+  }
 }
