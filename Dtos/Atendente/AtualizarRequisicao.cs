@@ -1,5 +1,6 @@
-namespace Back_end.Dtos.Atendente;
 using System.ComponentModel.DataAnnotations;
+
+namespace Back_end.Dtos.Atendente;
 
 public class AtualizarRequisicao
 {
