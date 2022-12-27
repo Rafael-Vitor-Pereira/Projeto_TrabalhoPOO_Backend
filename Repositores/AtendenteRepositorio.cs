@@ -46,4 +46,9 @@ public class AtendenteRepositorio
     _contexto.Remove(atendente);
     _contexto.SaveChanges();
   }
+
+  public Atendente BuscarPorEmail(string email)
+  {
+    return _contexto.Atendentes.AsNoTracking().FirstOrDefault(atendente => atendente.Email == email);
+  }
 }

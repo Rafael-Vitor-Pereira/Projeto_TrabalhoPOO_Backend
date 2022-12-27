@@ -19,10 +19,17 @@ public class AtendenteController : ControllerBase
   [HttpPost]
   public ActionResult<Resposta> Cadastro([FromBody] CriarRequisicao novoAtendente)
   {
-    var resposta = _atendenteServico.Cadastrar(novoAtendente);
+    try
+    {
+      var resposta = _atendenteServico.Cadastrar(novoAtendente);
 
-    //Enviar os dados da requisição para a classe de serviço
-    return CreatedAtAction(nameof(Buscar), new { id = resposta.Id }, resposta);
+      //Enviar os dados da requisição para a classe de serviço
+      return CreatedAtAction(nameof(Buscar), new { id = resposta.Id }, resposta);
+    }
+    catch (EmailExistente e)
+    {
+      return BadRequest(new { mensagem = e.mensage });
+    }
   }
 
   [HttpGet]
@@ -75,6 +82,10 @@ public class AtendenteController : ControllerBase
     catch (Exception e)
     {
       return NotFound(new { mensagem = e.Message });
+    }
+    catch (EmailExistente e)
+    {
+      return BadRequest(new { mensagem = e.Message });
     }
 
   }

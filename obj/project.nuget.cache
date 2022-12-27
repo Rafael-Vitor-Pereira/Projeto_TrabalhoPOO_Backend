@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "srcOKwkDWvGvc4ywagaLIZZI12qXEctLXYJIBQjbVbgKlShYz042QqD/fdZqtmm4qg7AQFUWuN65Hv757f2F0A==",
+  "dgSpecHash": "5Ox7KDnEnCtfMaYLSZLHoQbuuzRO+QwMhPhHMe1MfDCLIsb+WDqHzOc1mnoe5mS9uVkvuBer68mlg/FPj4cHug==",
   "success": false,
   "projectFilePath": "c:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Rafael\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",

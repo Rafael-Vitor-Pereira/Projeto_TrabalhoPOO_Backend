@@ -25,7 +25,7 @@ public class ClienteRepositorio
 
   public List<Cliente> Listar()
   {
-    //retorna uma lista com todos os cliente cadastrados
+    //retorna uma lista com todos os Clientes cadastrados
     return _contexto.Clientes.AsNoTracking().ToList();
   }
 
@@ -45,5 +45,10 @@ public class ClienteRepositorio
     //mandar o contexto remover
     _contexto.Remove(cliente);
     _contexto.SaveChanges();
+  }
+
+  public Cliente BuscarPorEmail(string email)
+  {
+    return _contexto.Clientes.AsNoTracking().FirstOrDefault(cliente => cliente.Email == email);
   }
 }

@@ -3,6 +3,7 @@ using Back_end.Models;
 using Back_end.Repositores;
 using Microsoft.AspNetCore.Mvc;
 using Mapster;
+using Back_end.Excecoes;
 
 namespace Back_end.Services;
 
@@ -16,12 +17,23 @@ public class AtendenteServico
   }
   public Resposta Cadastrar(CriarRequisicao novoAtendente)
   {
+    //verificando se existe atendente com o mesmo email
+    var atendenteExistente = _repositorio.BuscarPorEmail(novoAtendente.Email);
+
+    if (atendenteExistente is not null)
+    {
+      throw new EmailExistente();
+    }
+
     //copiar os dados da requisição para o modelo
     var atendente = novoAtendente.Adapt<Atendente>();
 
     //Regras de negócio específica
     var agora = DateTime.Now;
     atendente.DataCadastro = agora;
+
+    //Criptografando a senha
+    atendente.Senha = BCrypt.Net.BCrypt.HashPassword(atendente.Senha);
 
     //Enviar para o repositório salvar no BD
     _repositorio.CriarAtendente(atendente);
@@ -57,6 +69,16 @@ public class AtendenteServico
   {
     //Buscar o atendente pelo id
     var atendente = BuscarPeloId(id);
+
+    //se o atendente esta alterando seu email
+    if (atendente.Email != atendenteEditado.Email)
+    {
+      var atendenteExistente = _repositorio.BuscarPorEmail(atendenteEditado.Email);
+      if (atendenteExistente is not null)
+      {
+        throw new EmailExistente();
+      }
+    }
 
     //Copiar os dados da requisição para o modelo
     atendenteEditado.Adapt(atendente);
