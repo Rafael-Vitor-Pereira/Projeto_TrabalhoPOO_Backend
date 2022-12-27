@@ -15,13 +15,13 @@ public class IngredienteServico
   {
     _repositorio = repositorio;
   }
-  public Resposta Cadastrar(CriarRequisicao novoIngrediente)
+  public Resposta Cadastrar(CriarAtualizarRequisicao novoIngrediente)
   {
     //copiar os dados da requisição para o modelo
     var ingrediente = novoIngrediente.Adapt<Ingrediente>();
 
     //Enviar para o repositório salvar no BD
-    _repositorio.CriarIngrediente(ingrediente);
+    _repositorio.Cadastrar(ingrediente);
 
     //copiar os dados do modelo para a resposta
     var resposta = ingrediente.Adapt<Resposta>();
@@ -50,20 +50,10 @@ public class IngredienteServico
     return ingrediente.Adapt<Resposta>();
   }
 
-  public Resposta Atualizar(int id, AtualizarRequisicao ingredienteEditado)
+  public Resposta Atualizar(int id, CriarAtualizarRequisicao ingredienteEditado)
   {
     //Buscar o ingrediente pelo id
     var ingrediente = BuscarPeloId(id);
-
-    //se o ingrediente esta alterando seu email
-    if (ingrediente.Email != ingredienteEditado.Email)
-    {
-      var ingredienteExistente = _repositorio.BuscarPorEmail(ingredienteEditado.Email);
-      if (ingredienteExistente is not null)
-      {
-        throw new EmailExistente();
-      }
-    }
 
     //Copiar os dados da requisição para o modelo
     ingredienteEditado.Adapt(ingrediente);
@@ -81,7 +71,7 @@ public class IngredienteServico
     var ingrediente = BuscarPeloId(id);
 
     //Mandar o repositorio remover o ingrediente
-    _repositorio.Excluir(id);
+    _repositorio.Excluir(ingrediente);
   }
 
   private Ingrediente BuscarPeloId(int id, bool tracking = true)

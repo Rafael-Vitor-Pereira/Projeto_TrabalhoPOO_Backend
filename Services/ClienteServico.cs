@@ -36,7 +36,7 @@ public class ClienteServico
     cliente.Senha = BCrypt.Net.BCrypt.HashPassword(cliente.Senha);
 
     //Enviar para o repositório salvar no BD
-    _repositorio.CriarCliente(cliente);
+    _repositorio.Cadastrar(cliente);
 
     //copiar os dados do modelo para a resposta
     var resposta = cliente.Adapt<Resposta>();
@@ -96,7 +96,7 @@ public class ClienteServico
     var cliente = BuscarPeloId(id);
 
     //Mandar o repositorio remover o cliente
-    _repositorio.Excluir(id);
+    _repositorio.Excluir(cliente);
   }
 
   private Cliente BuscarPeloId(int id, bool tracking = true)

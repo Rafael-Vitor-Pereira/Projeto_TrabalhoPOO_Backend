@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Back_end.Dtos.Atendente;
 using Back_end.Services;
+using Back_end.Excecoes;
 
 namespace Back_end.Controllers;
 
@@ -28,7 +29,7 @@ public class AtendenteController : ControllerBase
     }
     catch (EmailExistente e)
     {
-      return BadRequest(new { mensagem = e.mensage });
+      return BadRequest(new { mensagem = e.Message });
     }
   }
 
@@ -79,13 +80,13 @@ public class AtendenteController : ControllerBase
       //Manda o serviço atualizar o atendente
       return Ok(_atendenteServico.Atualizar(id, atendenteEditado));
     }
-    catch (Exception e)
-    {
-      return NotFound(new { mensagem = e.Message });
-    }
     catch (EmailExistente e)
     {
       return BadRequest(new { mensagem = e.Message });
+    }
+    catch (Exception e)
+    {
+      return NotFound(new { mensagem = e.Message });
     }
 
   }

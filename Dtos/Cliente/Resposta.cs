@@ -1,4 +1,4 @@
-namespace Back_end.Dtos.Atendente;
+namespace Back_end.Dtos.Cliente;
 
 public class Resposta
 {

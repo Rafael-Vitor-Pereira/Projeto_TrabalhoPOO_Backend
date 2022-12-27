@@ -15,11 +15,11 @@ builder.Services.AddScoped<ClienteRepositorio>();
 builder.Services.AddScoped<IngredienteServico>();
 builder.Services.AddScoped<IngredienteRepositorio>();
 
-builder.Services.AddScoped<CustoServico>();
-builder.Services.AddScoped<CustoRepositorio>();
+// builder.Services.AddScoped<CustoServico>();
+// builder.Services.AddScoped<CustoRepositorio>();
 
-builder.Services.AddScoped<PedidoServico>();
-builder.Services.AddScoped<PedidoRepositorio>();
+// builder.Services.AddScoped<PedidoServico>();
+// builder.Services.AddScoped<PedidoRepositorio>();
 
 builder.Services.AddScoped<ProdutoServico>();
 builder.Services.AddScoped<ProdutoRepositorio>();

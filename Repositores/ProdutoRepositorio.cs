@@ -26,13 +26,15 @@ public class ProdutoRepositorio
   public List<Produto> Listar()
   {
     //retorna uma lista com todos os Produtos cadastrados
-    return _contexto.Produtos.AsNoTracking().ToList();
+    return _contexto.Produtos.Include(Produto => Produto.Pedidos).Include(Produto => Produto.Ingredientes).AsNoTracking().ToList();
   }
 
   public Produto Buscar(int id, bool tracking = true)
   {
     //Busca o Produto que tem o id recebido por parâmetro
-    return (tracking) ? _contexto.Produtos.FirstOrDefault(produto => produto.Id == id) : _contexto.Produtos.AsNoTracking().FirstOrDefault(produto => produto.Id == id);
+    return (tracking) ?
+        _contexto.Produtos.Include(Produto => Produto.Pedidos).Include(Produto => Produto.Ingredientes).FirstOrDefault(produto => produto.Id == id) :
+        _contexto.Produtos.AsNoTracking().Include(Produto => Produto.Pedidos).Include(Produto => Produto.Ingredientes).FirstOrDefault(produto => produto.Id == id);
   }
 
   public void Atualizar()

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Back_end.Dtos.Cliente;
 using Back_end.Services;
+using Back_end.Excecoes;
 
 namespace Back_end.Controllers;
 
@@ -28,7 +29,7 @@ public class ClienteController : ControllerBase
     }
     catch (EmailExistente e)
     {
-      return BadRequest(new { mensagem = e.mensage });
+      return BadRequest(new { mensagem = e.Message });
     }
   }
 
@@ -79,13 +80,13 @@ public class ClienteController : ControllerBase
       //Manda o serviço atualizar o cliente
       return Ok(_clienteServico.Atualizar(id, clienteEditado));
     }
-    catch (Exception e)
-    {
-      return NotFound(new { mensagem = e.Message });
-    }
     catch (EmailExistente e)
     {
       return BadRequest(new { mensagem = e.Message });
+    }
+    catch (Exception e)
+    {
+      return NotFound(new { mensagem = e.Message });
     }
 
   }

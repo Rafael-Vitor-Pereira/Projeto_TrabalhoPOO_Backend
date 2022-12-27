@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+// namespace Back_end.Dtos.Custo;
 
-namespace Back_end.Dtos.Custo;
-
-public class Resposta
-{
-    
-}
+// public class Resposta
+// {
+//   public int Id { get; set; }
+// }

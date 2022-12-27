@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+// using System.Threading.Tasks;
 
-namespace Back_end.Repositores;
+// namespace Back_end.Repositores;
 
-public class CustoRepositorio
-{
-    
-}
+// public class CustoRepositorio
+// {
+
+// }

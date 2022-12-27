@@ -3,7 +3,6 @@ using Back_end.Models;
 using Back_end.Repositores;
 using Microsoft.AspNetCore.Mvc;
 using Mapster;
-using Back_end.Excecoes;
 
 namespace Back_end.Services;
 
@@ -15,13 +14,13 @@ public class ProdutoServico
   {
     _repositorio = repositorio;
   }
-  public Resposta Cadastrar(CriarRequisicao novoProduto)
+  public Resposta Cadastrar(CriarAtualizarRequisicao novoProduto)
   {
     //copiar os dados da requisição para o modelo
     var produto = novoProduto.Adapt<Produto>();
 
     //Enviar para o repositório salvar no BD
-    _repositorio.CriarProduto(produto);
+    _repositorio.Cadastrar(produto);
 
     //copiar os dados do modelo para a resposta
     var resposta = produto.Adapt<Resposta>();
@@ -50,20 +49,10 @@ public class ProdutoServico
     return produto.Adapt<Resposta>();
   }
 
-  public Resposta Atualizar(int id, AtualizarRequisicao produtoEditado)
+  public Resposta Atualizar(int id, CriarAtualizarRequisicao produtoEditado)
   {
     //Buscar o produto pelo id
     var produto = BuscarPeloId(id);
-
-    //se o produto esta alterando seu email
-    if (produto.Email != produtoEditado.Email)
-    {
-      var produtoExistente = _repositorio.BuscarPorEmail(produtoEditado.Email);
-      if (produtoExistente is not null)
-      {
-        throw new EmailExistente();
-      }
-    }
 
     //Copiar os dados da requisição para o modelo
     produtoEditado.Adapt(produto);
@@ -81,7 +70,7 @@ public class ProdutoServico
     var produto = BuscarPeloId(id);
 
     //Mandar o repositorio remover o produto
-    _repositorio.Excluir(id);
+    _repositorio.Excluir(produto);
   }
 
   private Produto BuscarPeloId(int id, bool tracking = true)

@@ -36,7 +36,7 @@ public class AtendenteServico
     atendente.Senha = BCrypt.Net.BCrypt.HashPassword(atendente.Senha);
 
     //Enviar para o repositório salvar no BD
-    _repositorio.CriarAtendente(atendente);
+    _repositorio.Cadastrar(atendente);
 
     //copiar os dados do modelo para a resposta
     var resposta = atendente.Adapt<Resposta>();
@@ -96,7 +96,7 @@ public class AtendenteServico
     var atendente = BuscarPeloId(id);
 
     //Mandar o repositorio remover o atendente
-    _repositorio.Excluir(id);
+    _repositorio.Excluir(atendente);
   }
 
   private Atendente BuscarPeloId(int id, bool tracking = true)

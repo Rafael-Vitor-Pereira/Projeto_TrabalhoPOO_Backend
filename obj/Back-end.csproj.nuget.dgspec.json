@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj": {}
+    "C:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj": {
+    "C:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj",
+        "projectUniqueName": "C:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj",
         "projectName": "Back-end",
-        "projectPath": "c:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj",
+        "projectPath": "C:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj",
         "packagesPath": "C:\\Users\\Rafael\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\obj\\",
+        "outputPath": "C:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rafael\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -48,13 +48,17 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.1, )"
+              "version": "[6.0.12, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.1, )"
+              "version": "[6.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[6.0.12, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",

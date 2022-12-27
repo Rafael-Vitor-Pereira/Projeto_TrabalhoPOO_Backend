@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Back_end.Dtos.Produto;
 using Back_end.Services;
+using Back_end.Excecoes;
 
 namespace Back_end.Controllers;
 
@@ -17,19 +18,13 @@ public class ProdutoController : ControllerBase
   }
 
   [HttpPost]
-  public ActionResult<Resposta> Cadastro([FromBody] CriarRequisicao novoProduto)
+  public ActionResult<Resposta> Cadastro([FromBody] CriarAtualizarRequisicao novoProduto)
   {
-    try
-    {
-      var resposta = _produtoServico.Cadastrar(novoProduto);
 
-      //Enviar os dados da requisição para a classe de serviço
-      return CreatedAtAction(nameof(Buscar), new { id = resposta.Id }, resposta);
-    }
-    catch (EmailExistente e)
-    {
-      return BadRequest(new { mensagem = e.mensage });
-    }
+    var resposta = _produtoServico.Cadastrar(novoProduto);
+
+    //Enviar os dados da requisição para a classe de serviço
+    return CreatedAtAction(nameof(Buscar), new { id = resposta.Id }, resposta);
   }
 
   [HttpGet]
@@ -72,21 +67,20 @@ public class ProdutoController : ControllerBase
   }
 
   [HttpPut("{id:int}")]
-  public ActionResult<Resposta> Editar([FromRoute] int id, [FromBody] AtualizarRequisicao produtoEditado)
+  public ActionResult<Resposta> Editar([FromRoute] int id, [FromBody] CriarAtualizarRequisicao produtoEditado)
   {
     try
     {
       //Manda o serviço atualizar o produto
       return Ok(_produtoServico.Atualizar(id, produtoEditado));
     }
-    catch (Exception e)
-    {
-      return NotFound(new { mensagem = e.Message });
-    }
     catch (EmailExistente e)
     {
       return BadRequest(new { mensagem = e.Message });
     }
-
+    catch (Exception e)
+    {
+      return NotFound(new { mensagem = e.Message });
+    }
   }
 }

@@ -17,19 +17,12 @@ public class IngredienteController : ControllerBase
   }
 
   [HttpPost]
-  public ActionResult<Resposta> Cadastro([FromBody] CriarRequisicao novoIngrediente)
+  public ActionResult<Resposta> Cadastro([FromBody] CriarAtualizarRequisicao novoIngrediente)
   {
-    try
-    {
-      var resposta = _ingredienteServico.Cadastrar(novoIngrediente);
+    var resposta = _ingredienteServico.Cadastrar(novoIngrediente);
 
-      //Enviar os dados da requisição para a classe de serviço
-      return CreatedAtAction(nameof(Buscar), new { id = resposta.Id }, resposta);
-    }
-    catch (EmailExistente e)
-    {
-      return BadRequest(new { mensagem = e.mensage });
-    }
+    //Enviar os dados da requisição para a classe de serviço
+    return CreatedAtAction(nameof(Buscar), new { id = resposta.Id }, resposta);
   }
 
   [HttpGet]
@@ -72,7 +65,7 @@ public class IngredienteController : ControllerBase
   }
 
   [HttpPut("{id:int}")]
-  public ActionResult<Resposta> Editar([FromRoute] int id, [FromBody] AtualizarRequisicao ingredienteEditado)
+  public ActionResult<Resposta> Editar([FromRoute] int id, [FromBody] CriarAtualizarRequisicao ingredienteEditado)
   {
     try
     {
@@ -82,10 +75,6 @@ public class IngredienteController : ControllerBase
     catch (Exception e)
     {
       return NotFound(new { mensagem = e.Message });
-    }
-    catch (EmailExistente e)
-    {
-      return BadRequest(new { mensagem = e.Message });
     }
 
   }
