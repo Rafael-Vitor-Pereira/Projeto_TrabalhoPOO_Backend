@@ -26,18 +26,15 @@ public class PedidoRepositorio
   public List<Pedido> Listar()
   {
     //retorna uma lista com todos os Pedidos cadastrados
-    return _contexto.Pedidos.Include(Pedido => Pedido.Atendente).Include(Pedido => Pedido.Cliente)
-        .Include(Pedido => Pedido.Produtos).AsNoTracking().ToList();
+    return _contexto.Pedidos.Include(Pedido => Pedido.Atendente).Include(Pedido => Pedido.Cliente).Include(Pedido => Pedido.Produtos).AsNoTracking().ToList();
   }
 
   public Pedido Buscar(int id, bool tracking = true)
   {
     //Busca o Pedido que tem o id recebido por parâmetro
     return (tracking) ?
-        _contexto.Pedidos.Include(Pedido => Pedido.Atendente).Include(Pedido => Pedido.Cliente)
-        .Include(Pedido => Pedido.Produtos).FirstOrDefault(pedido => pedido.Id == id) :
-        _contexto.Pedidos.AsNoTracking().Include(Pedido => Pedido.Atendente).Include(Pedido => Pedido.Cliente)
-        .Include(Pedido => Pedido.Produtos).FirstOrDefault(pedido => pedido.Id == id);
+        _contexto.Pedidos.Include(Pedido => Pedido.Atendente).Include(Pedido => Pedido.Cliente).Include(Pedido => Pedido.Produtos).FirstOrDefault(pedido => pedido.Id == id) :
+        _contexto.Pedidos.AsNoTracking().Include(Pedido => Pedido.Atendente).Include(Pedido => Pedido.Cliente).Include(Pedido => Pedido.Produtos).FirstOrDefault(pedido => pedido.Id == id);
   }
 
   public void Atualizar()

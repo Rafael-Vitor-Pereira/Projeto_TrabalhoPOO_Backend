@@ -9,17 +9,19 @@ namespace Back_end.Services;
 public class PedidoServico
 {
   private readonly PedidoRepositorio _repositorio;
+  private readonly ProdutoRepositorio _repositorioP;
 
-  public PedidoServico([FromServices] PedidoRepositorio repositorio)
+  public PedidoServico([FromServices] PedidoRepositorio repositorio, [FromServices] ProdutoRepositorio repositorioP)
   {
     _repositorio = repositorio;
+    _repositorioP = repositorioP;
   }
   public Resposta Cadastrar(CriarRequisicao novoPedido)
   {
     //copiar os dados da requisição para o modelo
     var pedido = novoPedido.Adapt<Pedido>();
 
-    //Regras específicas
+    //Regras de negócio específica
     var agora = DateTime.Now;
     pedido.Data = agora;
 
@@ -87,5 +89,55 @@ public class PedidoServico
     }
 
     return pedido;
+  }
+
+  public Resposta AtribuirProduto(int PedidoId, int ProdutoId)
+  {
+    //Buscar no repositorio o pedido
+    var pedido = BuscarPeloId(PedidoId);
+
+    //Buscar no repositorio o produto
+    var produto = _repositorioP.Buscar(ProdutoId);
+
+    if (produto is null)
+    {
+      throw new Exception("Produto não encontrado");
+    }
+
+    //Verificar se o produto já está adicionado pra esse produto
+    if (pedido.Produtos.Exists(produto => produto.Id == ProdutoId))
+    {
+      throw new BadHttpRequestException("Produto já adicionado anteriormente ao produto");
+    }
+
+    //associar o produto para esse pedido
+    pedido.Produtos.Add(produto);
+
+    //Mandar o repositorio atualizar o pedido
+    _repositorio.Atualizar();
+
+    //copiar do modelo para a resposta e retornar
+    return pedido.Adapt<Resposta>();
+  }
+
+  public Resposta RemoverProduto(int PedidoId, int produtoId)
+  {
+    //Buscar no repositório o pedido
+    var pedido = BuscarPeloId(PedidoId);
+
+    //verificar se o produto já não foi removido anteriormente
+    if (!pedido.Produtos.Exists(produto => produto.Id == produtoId))
+    {
+      throw new BadHttpRequestException("Produto já foi removido anteriormente do pedido");
+    }
+
+    //remover o ingrediente do produto
+    pedido.Produtos.RemoveAll(produto => produto.Id == produtoId);
+
+    //atualizar o produto no BD
+    _repositorio.Atualizar();
+
+    //copiar do modelo pra resposta e retornar
+    return pedido.Adapt<Resposta>();
   }
 }

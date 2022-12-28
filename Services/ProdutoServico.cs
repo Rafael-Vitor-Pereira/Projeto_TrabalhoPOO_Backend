@@ -9,10 +9,12 @@ namespace Back_end.Services;
 public class ProdutoServico
 {
   private readonly ProdutoRepositorio _repositorio;
+  private readonly IngredienteRepositorio _repositorioI;
 
-  public ProdutoServico([FromServices] ProdutoRepositorio repositorio)
+  public ProdutoServico([FromServices] ProdutoRepositorio repositorio, [FromServices] IngredienteRepositorio repositorioI)
   {
     _repositorio = repositorio;
+    _repositorioI = repositorioI;
   }
   public Resposta Cadastrar(CriarAtualizarRequisicao novoProduto)
   {
@@ -83,5 +85,55 @@ public class ProdutoServico
     }
 
     return produto;
+  }
+
+  public Resposta AtribuirIngrediente(int ProdutoId, int IngredienteId)
+  {
+    //Buscar no repositorio o produto
+    var produto = BuscarPeloId(ProdutoId);
+
+    //Buscar no repositorio o ingrediente
+    var ingrediente = _repositorioI.Buscar(IngredienteId);
+
+    if (ingrediente is null)
+    {
+      throw new Exception("Ingrediente não encontrado");
+    }
+
+    //Verificar se o ingrediente já está adicionado pra esse produto
+    if (produto.Ingredientes.Exists(ingrediente => ingrediente.Id == IngredienteId))
+    {
+      throw new BadHttpRequestException("Ingrediente já adicionado anteriormente ao produto");
+    }
+
+    //associar o ingrediente para esse produto
+    produto.Ingredientes.Add(ingrediente);
+
+    //Mandar o repositorio atualizar o produto
+    _repositorio.Atualizar();
+
+    //copiar do modelo para a resposta e retornar
+    return produto.Adapt<Resposta>();
+  }
+
+  public Resposta RemoverIngrediente(int produtoId, int ingredienteId)
+  {
+    //Buscar no repositório o produto
+    var produto = BuscarPeloId(produtoId);
+
+    //verificar se o ingrediente já não foi removido anteriormente
+    if (!produto.Ingredientes.Exists(ingrediente => ingrediente.Id == ingredienteId))
+    {
+      throw new BadHttpRequestException("Ingrediente já foi removido anteriormente ao produto");
+    }
+
+    //remover o ingrediente do produto
+    produto.Ingredientes.RemoveAll(ingrediente => ingrediente.Id == ingredienteId);
+
+    //atualizar o produto no BD
+    _repositorio.Atualizar();
+
+    //copiar do modelo pra resposta e retornar
+    return produto.Adapt<Resposta>();
   }
 }

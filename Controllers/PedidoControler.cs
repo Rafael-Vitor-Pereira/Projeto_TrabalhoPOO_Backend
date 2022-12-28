@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Back_end.Dtos.Pedido;
 using Back_end.Services;
-using Back_end.Excecoes;
 
 namespace Back_end.Controllers;
 
@@ -73,6 +72,40 @@ public class PedidoController : ControllerBase
     {
       //Manda o serviço atualizar o pedido
       return Ok(_pedidoServico.Atualizar(id, pedidoEditado));
+    }
+    catch (Exception e)
+    {
+      return NotFound(new { mensagem = e.Message });
+    }
+  }
+
+  [HttpPut("{pedidoId:int}/produto/{produtoId:int}")]
+  public ActionResult<Resposta> CadastrarProduto([FromRoute] int pedidoId, [FromRoute] int produtoId)
+  {
+    try
+    {
+      return Ok(_pedidoServico.AtribuirProduto(pedidoId, produtoId));
+    }
+    catch (BadHttpRequestException e)
+    {
+      return BadRequest(new { mensagem = e.Message });
+    }
+    catch (Exception e)
+    {
+      return NotFound(new { mensagem = e.Message });
+    }
+  }
+
+  [HttpDelete("{pedidoId:int}/produto/{produtoId:int}")]
+  public ActionResult<Resposta> DeleteProduto([FromRoute] int pedidoId, [FromRoute] int produtoId)
+  {
+    try
+    {
+      return Ok(_pedidoServico.RemoverProduto(pedidoId, produtoId));
+    }
+    catch (BadHttpRequestException e)
+    {
+      return BadRequest(new { mensagem = e.Message });
     }
     catch (Exception e)
     {
