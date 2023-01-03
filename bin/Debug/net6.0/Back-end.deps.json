@@ -9,7 +9,7 @@
       "Back-end/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
-          "Mapster": "7.3.0",
+          "Mapster": "6.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.12",
           "Microsoft.EntityFrameworkCore.Design": "6.0.12",
           "Microsoft.EntityFrameworkCore.Relational": "6.0.12",
@@ -36,24 +36,15 @@
           }
         }
       },
-      "Mapster/7.3.0": {
+      "Mapster/6.0.0": {
         "dependencies": {
-          "Mapster.Core": "1.2.0",
           "Microsoft.CSharp": "4.3.0",
           "System.Reflection.Emit": "4.3.0"
         },
         "runtime": {
           "lib/netstandard2.0/Mapster.dll": {
-            "assemblyVersion": "7.3.0.0",
-            "fileVersion": "7.3.0.0"
-          }
-        }
-      },
-      "Mapster.Core/1.2.0": {
-        "runtime": {
-          "lib/netstandard2.0/Mapster.Core.dll": {
-            "assemblyVersion": "1.2.0.0",
-            "fileVersion": "1.2.0.0"
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.0.0"
           }
         }
       },
@@ -489,19 +480,12 @@
       "path": "humanizer.core/2.8.26",
       "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
     },
-    "Mapster/7.3.0": {
+    "Mapster/6.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-NrCUX/rJa5PTyo6iW4AL5dZLU9PDNlYnrJOVjgdpo5OQM9EtWH2CMHnC5sSuJWC0d0b0SnmeRrIviEem6WxtuQ==",
-      "path": "mapster/7.3.0",
-      "hashPath": "mapster.7.3.0.nupkg.sha512"
-    },
-    "Mapster.Core/1.2.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-TNdqZk2zAuBYfJF88D/3clQTOyOdqr1crU81yZQtlGa+e7FYWhJdK/buBWT+TpM3qQko9UzmzfOT4iq3JCs/ZA==",
-      "path": "mapster.core/1.2.0",
-      "hashPath": "mapster.core.1.2.0.nupkg.sha512"
+      "sha512": "sha512-jdMsdzSc+XgTyxgKA7Sicqxq2r6+jtACDBoFpFoDSG8NW4sVB/HmYWOaxx2IF74KjIB0OHZAw6P3aBtqqK9qkA==",
+      "path": "mapster/6.0.0",
+      "hashPath": "mapster.6.0.0.nupkg.sha512"
     },
     "Microsoft.CSharp/4.3.0": {
       "type": "package",

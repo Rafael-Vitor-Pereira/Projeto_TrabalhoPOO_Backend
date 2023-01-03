@@ -28,10 +28,9 @@
           }
         }
       },
-      "Mapster/7.3.0": {
+      "Mapster/6.0.0": {
         "type": "package",
         "dependencies": {
-          "Mapster.Core": "1.2.0",
           "Microsoft.CSharp": "4.3.0",
           "System.Reflection.Emit": "4.3.0"
         },
@@ -40,15 +39,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Mapster.dll": {}
-        }
-      },
-      "Mapster.Core/1.2.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Mapster.Core.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Mapster.Core.dll": {}
         }
       },
       "Microsoft.CSharp/4.3.0": {
@@ -927,34 +917,20 @@
         "logo.png"
       ]
     },
-    "Mapster/7.3.0": {
-      "sha512": "NrCUX/rJa5PTyo6iW4AL5dZLU9PDNlYnrJOVjgdpo5OQM9EtWH2CMHnC5sSuJWC0d0b0SnmeRrIviEem6WxtuQ==",
+    "Mapster/6.0.0": {
+      "sha512": "jdMsdzSc+XgTyxgKA7Sicqxq2r6+jtACDBoFpFoDSG8NW4sVB/HmYWOaxx2IF74KjIB0OHZAw6P3aBtqqK9qkA==",
       "type": "package",
-      "path": "mapster/7.3.0",
+      "path": "mapster/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "icon.png",
+        "lib/net40/Mapster.dll",
+        "lib/net45/Mapster.dll",
         "lib/netstandard1.3/Mapster.dll",
         "lib/netstandard2.0/Mapster.dll",
-        "mapster.7.3.0.nupkg.sha512",
+        "mapster.6.0.0.nupkg.sha512",
         "mapster.nuspec"
-      ]
-    },
-    "Mapster.Core/1.2.0": {
-      "sha512": "TNdqZk2zAuBYfJF88D/3clQTOyOdqr1crU81yZQtlGa+e7FYWhJdK/buBWT+TpM3qQko9UzmzfOT4iq3JCs/ZA==",
-      "type": "package",
-      "path": "mapster.core/1.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "icon.png",
-        "lib/net40/Mapster.Core.dll",
-        "lib/net45/Mapster.Core.dll",
-        "lib/netstandard1.3/Mapster.Core.dll",
-        "lib/netstandard2.0/Mapster.Core.dll",
-        "mapster.core.1.2.0.nupkg.sha512",
-        "mapster.core.nuspec"
       ]
     },
     "Microsoft.CSharp/4.3.0": {
@@ -3114,7 +3090,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "BCrypt.Net-Next >= 4.0.3",
-      "Mapster >= 7.3.0",
+      "Mapster >= 6.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.12",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.12",
       "Microsoft.EntityFrameworkCore.Relational >= 6.0.12",
@@ -3165,7 +3141,7 @@
           },
           "Mapster": {
             "target": "Package",
-            "version": "[7.3.0, )"
+            "version": "[6.0.0, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",

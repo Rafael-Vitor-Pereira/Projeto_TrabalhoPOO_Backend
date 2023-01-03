@@ -14,7 +14,6 @@ C:\Users\Rafael\Desktop\Rafael\IF\Trabalhos\POO2\Back-end\bin\Debug\net6.0\Back-
 C:\Users\Rafael\Desktop\Rafael\IF\Trabalhos\POO2\Back-end\bin\Debug\net6.0\Back-end.pdb
 C:\Users\Rafael\Desktop\Rafael\IF\Trabalhos\POO2\Back-end\bin\Debug\net6.0\BCrypt.Net-Next.dll
 C:\Users\Rafael\Desktop\Rafael\IF\Trabalhos\POO2\Back-end\bin\Debug\net6.0\Mapster.dll
-C:\Users\Rafael\Desktop\Rafael\IF\Trabalhos\POO2\Back-end\bin\Debug\net6.0\Mapster.Core.dll
 C:\Users\Rafael\Desktop\Rafael\IF\Trabalhos\POO2\Back-end\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\Rafael\Desktop\Rafael\IF\Trabalhos\POO2\Back-end\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\Rafael\Desktop\Rafael\IF\Trabalhos\POO2\Back-end\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll

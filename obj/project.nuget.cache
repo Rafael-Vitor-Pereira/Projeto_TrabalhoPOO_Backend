@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "VakrH/UKdhlYYXOtG+zarVJwAEXjS/cRPdX4Oq5KQVZnJhI7vZmQQAMydYBDGATZmdho3ET2PImBlxQHhInBRw==",
+  "dgSpecHash": "18ow+yxmQOU4KTTCYZ6LjbAGyqBTEN8o5HKcg9SJfUOnEc+WMh5eZGHwjk6wgxqwP81D1ooFFl74cDUBSm6RHw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Rafael\\Desktop\\Rafael\\IF\\Trabalhos\\POO2\\Back-end\\Back-end.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rafael\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\Rafael\\.nuget\\packages\\mapster\\7.3.0\\mapster.7.3.0.nupkg.sha512",
-    "C:\\Users\\Rafael\\.nuget\\packages\\mapster.core\\1.2.0\\mapster.core.1.2.0.nupkg.sha512",
+    "C:\\Users\\Rafael\\.nuget\\packages\\mapster\\6.0.0\\mapster.6.0.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.csharp\\4.3.0\\microsoft.csharp.4.3.0.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.12\\microsoft.entityframeworkcore.6.0.12.nupkg.sha512",
     "C:\\Users\\Rafael\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.12\\microsoft.entityframeworkcore.abstractions.6.0.12.nupkg.sha512",
